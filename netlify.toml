@@ -2,7 +2,26 @@
   command = "npm run build"
   publish = "dist"
 
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA fallback: cualquier ruta sirve index.html para que React Router funcione
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Cache agresivo para assets versionados (Vite genera /assets/* con hash)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache corto para el HTML (siempre debe revalidarse)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

@@ -1,32 +1,68 @@
-# React + TypeScript + Vite
+# FLUXWEB
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Sitio web de FLUXWEB construido con **Vite + React + TypeScript + Tailwind CSS 4**.
 
-Currently, two official plugins are available:
+## 🚀 Desarrollo local
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev      # servidor de desarrollo en http://localhost:5173
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 📦 Build de producción
+
+```bash
+npm run build    # genera la carpeta dist/
+npm run preview  # previsualiza el build localmente
+```
+
+## 🌐 Deploy en Netlify
+
+El proyecto ya está configurado para Netlify (`netlify.toml`). Pasos para desplegar:
+
+### 1. Subir a GitHub
+
+Si aún no creaste el repo remoto:
+
+```bash
+# Crea un repo vacío en https://github.com/new (no inicialices con README)
+git remote add origin https://github.com/TU-USUARIO/fluxweb.git
+git branch -M main            # Netlify trabaja mejor con main; si prefieres master, déjalo así
+git push -u origin main
+```
+
+> **Nota:** si tu rama es `master` y querés que Netlify la use, podés cambiarlo en la config del sitio en Netlify (Build settings → Branch to deploy).
+
+### 2. Conectar con Netlify
+
+1. Entrá a [https://app.netlify.com](https://app.netlify.com) e iniciá sesión.
+2. Click en **"Add new site" → "Import an existing project"**.
+3. Elegí **GitHub** como proveedor y autorizá el acceso.
+4. Seleccioná el repositorio `fluxweb`.
+5. Netlify detecta automáticamente la configuración desde `netlify.toml`:
+   - **Build command:** `npm run build`
+   - **Publish directory:** `dist`
+   - **Node version:** 20+ (recomendado, agregala en `netlify.toml` si hace falta)
+6. Click en **"Deploy site"**.
+
+### 3. Deploys automáticos
+
+Cada `git push` a la rama principal va a disparar un nuevo deploy automáticamente.
+
+## ⚙️ Variables de entorno
+
+Si necesitás variables de entorno (por ejemplo claves de API), configuralas en:
+**Netlify Dashboard → Site settings → Environment variables**
+
+## 📁 Estructura
+
+```
+fluxweb/
+├── public/           # assets estáticos servidos tal cual
+├── src/              # código fuente (componentes, páginas, etc.)
+├── index.html        # HTML raíz
+├── netlify.toml      # configuración de Netlify
+├── vite.config.ts    # configuración de Vite
+├── tailwind.config.js
+└── package.json
+```
