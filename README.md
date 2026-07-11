@@ -51,6 +51,26 @@ git push -u origin main
 
 Cada `git push` a la rama `main` va a disparar un nuevo deploy automáticamente.
 
+## 🌐 Deploy en Vercel
+
+La configuración ya está lista y optimizada para **Vercel** mediante el archivo [vercel.json](file:///c:/Users/Usuario/OneDrive/Desktop/FLUXWEB/vercel.json), el cual gestiona la redirección del enrutamiento SPA.
+
+### 1. Subir a GitHub o Gitlab
+Sube tu proyecto a un repositorio remoto de GitHub, GitLab o Bitbucket.
+
+### 2. Conectar e importar en Vercel
+1. Ve a [https://vercel.com](https://vercel.com) e inicia sesión con tu cuenta.
+2. Haz clic en **"Add New"** → **"Project"**.
+3. Importa el repositorio de tu proyecto (`fluxweb`).
+4. Vercel detectará automáticamente que es un proyecto de **Vite**.
+5. Revisa los siguientes valores en la configuración del build:
+   - **Framework Preset:** Vite
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+6. Haz clic en **"Deploy"**.
+
+Una vez finalizado el deploy, Vercel te proporcionará una URL de producción (por ejemplo, `fluxweb.vercel.app`) y manejará de forma automática las redirecciones para React Router gracias a la configuración en [vercel.json](file:///c:/Users/Usuario/OneDrive/Desktop/FLUXWEB/vercel.json).
+
 ## ⚙️ Variables de entorno
 
 Si necesitás variables de entorno (por ejemplo claves de API), configuralas en:
